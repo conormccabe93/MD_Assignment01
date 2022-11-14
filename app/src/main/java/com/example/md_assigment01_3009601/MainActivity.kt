@@ -7,6 +7,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.md_assigment01_3009601.models.Place
 import com.example.md_assigment01_3009601.models.UserCreatedMap
 
+// GitHub REPO:  https://github.com/conormccabe93/MD_Assignment01.git
+
 class MainActivity : AppCompatActivity() {
     // define recycler view
     private lateinit var mapRecyclerView: RecyclerView
