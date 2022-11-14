@@ -17,5 +17,8 @@ class MainActivity : AppCompatActivity() {
         mapRecyclerView = findViewById(R.id.mapRecyclerView)
         //Create layout Manager for list of User maps
         mapRecyclerView.layoutManager = LinearLayoutManager(this)
+
+        // Create adapter for displaying data from user
+        mapRecyclerView.adapter = MapAdapter(this, emptyList())
     }
 }
