@@ -33,6 +33,8 @@ class MainActivity : AppCompatActivity() {
             // Log statement to show which map is selected
             override fun onItemClick(position: Int) {
                 Log.i(TAG,"onItemClick $position")
+                // Create a path to take user to new Activity
+
             }
 
         })
