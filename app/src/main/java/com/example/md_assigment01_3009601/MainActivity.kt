@@ -1,5 +1,6 @@
 package com.example.md_assigment01_3009601
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -33,8 +34,9 @@ class MainActivity : AppCompatActivity() {
             // Log statement to show which map is selected
             override fun onItemClick(position: Int) {
                 Log.i(TAG,"onItemClick $position")
-                // Create a path to take user to new Activity
-
+                // Create a path to take user to new Activity ie. Map View of location
+                val intent = Intent(this@MainActivity,DisplayUserMapActivity::class.java)
+                startActivity(intent)
             }
 
         })
