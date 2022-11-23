@@ -2,12 +2,15 @@ package com.example.md_assigment01_3009601
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.md_assigment01_3009601.models.Place
 import com.example.md_assigment01_3009601.models.UserCreatedMap
 
 // GitHub REPO:  https://github.com/conormccabe93/MD_Assignment01.git
+
+private const val TAG = "MainActivity"
 
 class MainActivity : AppCompatActivity() {
     // define recycler view
@@ -26,7 +29,13 @@ class MainActivity : AppCompatActivity() {
         mapRecyclerView.layoutManager = LinearLayoutManager(this)
 
         // Create adapter for displaying data from user
-        mapRecyclerView.adapter = MapAdapter(this, test1)
+        mapRecyclerView.adapter = MapAdapter(this, test1, object: MapAdapter.OnClickListener{
+            // Log statement to show which map is selected
+            override fun onItemClick(position: Int) {
+                Log.i(TAG,"onItemClick $position")
+            }
+
+        })
     }
 
     // Create Sample data to test display
