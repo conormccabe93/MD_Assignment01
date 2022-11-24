@@ -12,6 +12,7 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.example.md_assigment01_3009601.databinding.ActivityDisplayUserMapBinding
 import com.example.md_assigment01_3009601.models.UserCreatedMap
+import com.google.android.gms.maps.model.LatLngBounds
 
 private const val TAG = "DisplayUserMapActivity"
 
@@ -49,10 +50,16 @@ class DisplayUserMapActivity : AppCompatActivity(), OnMapReadyCallback {
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
 
+        // Set display of maps to focus on area where the locations are
+        val boundsBuilder = LatLngBounds.Builder()
+
         // Create location markers for each spot on individual maps
         for (place in userCreatedMap.places){
             val latLng = LatLng(place.latitude,place.longitude)
+            boundsBuilder.include(latLng)
             mMap.addMarker(MarkerOptions().position(latLng).title(place.title).snippet(place.description))
         }
+        // Set camera move to centre focus on user locations
+        mMap.moveCamera(CameraUpdateFactory.newLatLngBounds(boundsBuilder.build(),500,500,0))
     }
 }
