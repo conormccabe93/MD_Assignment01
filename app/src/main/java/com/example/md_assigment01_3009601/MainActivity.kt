@@ -12,10 +12,12 @@ import com.example.md_assigment01_3009601.models.UserCreatedMap
 // GitHub REPO:  https://github.com/conormccabe93/MD_Assignment01.git
 
 private const val TAG = "MainActivity"
+const val EXTRA_USER_MAP = "EXTRA_USER_MAP"
 
 class MainActivity : AppCompatActivity() {
     // define recycler view
     private lateinit var mapRecyclerView: RecyclerView
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,7 +38,8 @@ class MainActivity : AppCompatActivity() {
                 Log.i(TAG,"onItemClick $position")
                 // Create a path to take user to new Activity ie. Map View of location
                 val intent = Intent(this@MainActivity,DisplayUserMapActivity::class.java)
-                startActivity(intent)
+                intent.putExtra(EXTRA_USER_MAP, test1[position])
+                //startActivity(intent)
             }
 
         })
