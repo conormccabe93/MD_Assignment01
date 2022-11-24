@@ -39,7 +39,7 @@ class MainActivity : AppCompatActivity() {
                 // Create a path to take user to new Activity ie. Map View of location
                 val intent = Intent(this@MainActivity,DisplayUserMapActivity::class.java)
                 intent.putExtra(EXTRA_USER_MAP, test1[position])
-                //startActivity(intent)
+                startActivity(intent)
             }
 
         })

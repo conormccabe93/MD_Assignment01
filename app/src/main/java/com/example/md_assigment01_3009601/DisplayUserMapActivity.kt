@@ -49,12 +49,10 @@ class DisplayUserMapActivity : AppCompatActivity(), OnMapReadyCallback {
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
 
-        // Create log statement top show which map is being selected
-        Log.i((TAG),"MAP selected >>  ${userCreatedMap.title}")
-
-        // Add a marker in Sydney and move the camera
-        val sydney = LatLng(-34.0, 151.0)
-        mMap.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
+        // Create location markers for each spot on individual maps
+        for (place in userCreatedMap.places){
+            val latLng = LatLng(place.latitude,place.longitude)
+            mMap.addMarker(MarkerOptions().position(latLng).title(place.title).snippet(place.description))
+        }
     }
 }
