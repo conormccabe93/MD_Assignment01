@@ -1,8 +1,11 @@
 package com.example.md_assigment01_3009601
 
+import android.app.Dialog
+import android.content.DialogInterface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.appcompat.app.AlertDialog
 
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -49,16 +52,37 @@ class CreateNewMapActivity : AppCompatActivity(), OnMapReadyCallback {
 
         // Log statement to show longclick
         mMap.setOnMapLongClickListener { LatLng ->
-            Log.i(TAG,"setOnMapLongClickListener")
-            val marker = mMap.addMarker(MarkerOptions().position(LatLng).title("TEST MARKER LONGCLICK").snippet("TEST SNIPPET"))
+            
+            // Log.i(TAG,"setOnMapLongClickListener")
+
+            // Show dialog option to confirm location marker
+            showAlertDialog(LatLng)
+
+        }
+    }
+
+
+    private fun showAlertDialog(latLng: LatLng) {
+
+        // Dialog popup to confirm if user wants selected location
+        val dialogButton =
+            AlertDialog.Builder(this)
+            .setTitle("CREATE NEW MARKER")
+            .setMessage("TEST MESSAGE")
+            .setPositiveButton("OK",null)
+            .setNegativeButton("CANCEL",null)
+            .show()
+
+        // If user selects yes, save location and add new maker
+        dialogButton.getButton(DialogInterface.BUTTON_POSITIVE).setOnClickListener{
+            val marker = mMap.addMarker(MarkerOptions().position(latLng).title("TEST MARKER LONGCLICK").snippet("TEST SNIPPET"))
             if (marker != null) {
                 userMarkers.add(marker)
             }
+            // remove button when option is selected
+            dialogButton.dismiss()
         }
 
-        // Add a marker in Sydney and move the camera
-//        val sydney = LatLng(-34.0, 151.0)
-//        mMap.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
-//        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
+
     }
 }
