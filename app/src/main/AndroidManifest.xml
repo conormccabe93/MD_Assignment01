@@ -29,6 +29,10 @@
             android:value="${MAPS_API_KEY}" />
 
         <activity
+            android:name=".CreateNewMapActivity"
+            android:exported="false"
+            android:label="@string/title_activity_create_new_map" />
+        <activity
             android:name=".DisplayUserMapActivity"
             android:exported="false"
             android:label="@string/title_activity_display_user_map" />

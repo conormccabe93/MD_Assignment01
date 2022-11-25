@@ -1,5 +1,6 @@
 package com.example.md_assigment01_3009601
 
+import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -14,7 +15,9 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 private const val TAG = "MainActivity"
 const val EXTRA_USER_MAP = "EXTRA_USER_MAP"
+private const val REQUEST_CODE = 123
 
+@Suppress("DEPRECATION")
 class MainActivity : AppCompatActivity() {
     // define recycler view
     private lateinit var mapRecyclerView: RecyclerView
@@ -46,11 +49,23 @@ class MainActivity : AppCompatActivity() {
                 startActivity(intent)
             }
         })
-        
+
         // Check if button click is registered
         floatingActionButton.setOnClickListener{
             Log.i(TAG,"Button Clicked")
+
+            // Pass data back from new UserMap
+            val intent = Intent(this@MainActivity,CreateNewMapActivity::class.java)
+            startActivityForResult(intent, REQUEST_CODE)
         }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        // Check if requestcode and resultcode match
+        if (requestCode == REQUEST_CODE && resultCode == Activity.RESULT_OK){
+            // return new map data
+        }
+        super.onActivityResult(requestCode, resultCode, data)
     }
 
     // Create Sample data to test display

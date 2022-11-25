@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">MD_Assigment01_3009601</string>
     <string name="title_activity_display_user_map">DisplayUserMapActivity</string>
+    <string name="title_activity_create_new_map">CreateNewMapActivity</string>
 </resources>
