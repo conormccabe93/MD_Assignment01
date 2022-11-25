@@ -32,6 +32,9 @@ class DisplayUserMapActivity : AppCompatActivity(), OnMapReadyCallback {
         // Get map from intent
         userCreatedMap = intent.getSerializableExtra(EXTRA_USER_MAP) as UserCreatedMap
 
+        // Update title of screen to show title of selected map
+        supportActionBar?.title = userCreatedMap.title
+
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         val mapFragment = supportFragmentManager
             .findFragmentById(R.id.map) as SupportMapFragment
@@ -61,5 +64,8 @@ class DisplayUserMapActivity : AppCompatActivity(), OnMapReadyCallback {
         }
         // Set camera move to centre focus on user locations
         mMap.moveCamera(CameraUpdateFactory.newLatLngBounds(boundsBuilder.build(),500,500,0))
+
+        // Animation of camera to zoom in on markers
+        // mMap.animateCamera(CameraUpdateFactory.newLatLngBounds(boundsBuilder.build(),500,500,0))
     }
 }
