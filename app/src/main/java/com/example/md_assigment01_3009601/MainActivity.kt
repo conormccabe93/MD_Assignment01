@@ -15,6 +15,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 private const val TAG = "MainActivity"
 const val EXTRA_USER_MAP = "EXTRA_USER_MAP"
+const val EXTRA_MAP_TITLE = "EXTRA_MAP_TITLE"
 private const val REQUEST_CODE = 123
 
 @Suppress("DEPRECATION")
@@ -52,10 +53,14 @@ class MainActivity : AppCompatActivity() {
 
         // Check if button click is registered
         floatingActionButton.setOnClickListener{
-            Log.i(TAG,"Button Clicked")
+            // Log.i(TAG,"Button Clicked")
 
             // Pass data back from new UserMap
             val intent = Intent(this@MainActivity,CreateNewMapActivity::class.java)
+
+            // Set new map name -> TEST NAME for now
+            intent.putExtra(EXTRA_MAP_TITLE,"MAP NAME")
+
             startActivityForResult(intent, REQUEST_CODE)
         }
     }
@@ -87,8 +92,8 @@ class MainActivity : AppCompatActivity() {
             UserCreatedMap("Test Map 3 - Dublin Ireland",
                 listOf(
                     Place("Dublin Castle", "The Dublin Castle",53.343, -6.267),
-                    Place("Ha'penny Bridge", "The Ha'penny Birdge",53.346, -6.263),
-                    Place("O'Connell Bridge", " The O'Connell Brdige",53.347, -6.259),
+                    Place("Ha'penny Bridge", "The Ha'penny Bridge",53.346, -6.263),
+                    Place("O'Connell Bridge", " The O'Connell Bridge",53.347, -6.259),
                     Place("Trinity College", "The Trinity College", 53.343, -6.254)
                     )
                 )
