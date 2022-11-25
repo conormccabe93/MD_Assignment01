@@ -53,11 +53,21 @@ class CreateNewMapActivity : AppCompatActivity(), OnMapReadyCallback {
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
 
-        // Log statement to show longclick
+        // Set longclick listener to dialog popup
         mMap.setOnMapLongClickListener { LatLng ->
 
             // Show dialog option to confirm location marker
             showAlertDialog(LatLng)
+        }
+
+        // Delete function to remove marker by tapping on it
+        mMap.setOnInfoWindowClickListener { markerToDelete ->
+            Log.i(TAG,"onWindowClickListener -> delete marker")
+            // remove from list of markers
+            userMarkers.remove(markerToDelete)
+
+            // remove marker from map
+            markerToDelete.remove()
         }
     }
 
