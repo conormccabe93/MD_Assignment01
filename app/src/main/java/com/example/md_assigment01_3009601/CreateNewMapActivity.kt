@@ -5,6 +5,9 @@ import android.content.DialogInterface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.LayoutInflater
+import android.widget.EditText
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -52,37 +55,50 @@ class CreateNewMapActivity : AppCompatActivity(), OnMapReadyCallback {
 
         // Log statement to show longclick
         mMap.setOnMapLongClickListener { LatLng ->
-            
-            // Log.i(TAG,"setOnMapLongClickListener")
 
             // Show dialog option to confirm location marker
             showAlertDialog(LatLng)
-
         }
     }
 
 
     private fun showAlertDialog(latLng: LatLng) {
 
+        // Form input for user to create a title / description
+        val placeFormView = LayoutInflater.from(this).inflate(R.layout.dialog_create_marker,null)
+
         // Dialog popup to confirm if user wants selected location
         val dialogButton =
             AlertDialog.Builder(this)
-            .setTitle("CREATE NEW MARKER")
-            .setMessage("TEST MESSAGE")
-            .setPositiveButton("OK",null)
-            .setNegativeButton("CANCEL",null)
-            .show()
+                .setTitle("Create New Marker!")
+                .setView(placeFormView)
+                .setPositiveButton("Ok",null)
+                .setNegativeButton("Cancel",null)
+                .show()
 
         // If user selects yes, save location and add new maker
-        dialogButton.getButton(DialogInterface.BUTTON_POSITIVE).setOnClickListener{
-            val marker = mMap.addMarker(MarkerOptions().position(latLng).title("TEST MARKER LONGCLICK").snippet("TEST SNIPPET"))
-            if (marker != null) {
-                userMarkers.add(marker)
+        dialogButton.getButton(DialogInterface.BUTTON_POSITIVE).setOnClickListener {
+
+            // Get user input from dialog box
+            val userMapName = placeFormView.findViewById<EditText>(R.id.userMapName).text.toString()
+            val userDescription = placeFormView.findViewById<EditText>(R.id.userDescription).text.toString()
+
+            // Check if both text blocks have been filled in
+            if (userMapName.trim().isEmpty() || userDescription.trim().isEmpty()) {
+
+                // prompt user to fill in both text blocks
+                Toast.makeText( this,"Fill out Name / Description", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+
+            } else {
+                // Add new marker to the map
+                val marker = mMap.addMarker(MarkerOptions().position(latLng).title(userMapName).snippet(userDescription))
+                if (marker != null) {
+                    userMarkers.add(marker)
+                }
+                // remove button when option is selected
+                dialogButton.dismiss()
             }
-            // remove button when option is selected
-            dialogButton.dismiss()
         }
-
-
     }
 }
