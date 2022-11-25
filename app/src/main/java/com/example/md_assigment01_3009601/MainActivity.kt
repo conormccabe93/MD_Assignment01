@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.md_assigment01_3009601.models.Place
 import com.example.md_assigment01_3009601.models.UserCreatedMap
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 // GitHub REPO:  https://github.com/conormccabe93/MD_Assignment01.git
 
@@ -17,6 +18,7 @@ const val EXTRA_USER_MAP = "EXTRA_USER_MAP"
 class MainActivity : AppCompatActivity() {
     // define recycler view
     private lateinit var mapRecyclerView: RecyclerView
+    private lateinit var floatingActionButton: FloatingActionButton
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,6 +30,8 @@ class MainActivity : AppCompatActivity() {
 
         // Initialize recyclerview variable
         mapRecyclerView = findViewById(R.id.mapRecyclerView)
+        floatingActionButton = findViewById(R.id.floatingActionButton)
+
         //Create layout Manager for list of User maps
         mapRecyclerView.layoutManager = LinearLayoutManager(this)
 
@@ -41,8 +45,12 @@ class MainActivity : AppCompatActivity() {
                 intent.putExtra(EXTRA_USER_MAP, test1[position])
                 startActivity(intent)
             }
-
         })
+        
+        // Check if button click is registered
+        floatingActionButton.setOnClickListener{
+            Log.i(TAG,"Button Clicked")
+        }
     }
 
     // Create Sample data to test display
