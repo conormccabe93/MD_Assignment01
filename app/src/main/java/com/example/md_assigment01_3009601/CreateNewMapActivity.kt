@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.core.content.ContextCompat
 
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -18,6 +19,7 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.example.md_assigment01_3009601.databinding.ActivityCreateNewMapBinding
 import com.google.android.gms.maps.model.Marker
+import com.google.android.material.snackbar.Snackbar
 
 private const val TAG = "CreateNewMapActivity"
 
@@ -39,6 +41,25 @@ class CreateNewMapActivity : AppCompatActivity(), OnMapReadyCallback {
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         val mapFragment = supportFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
+
+
+        // Only one snackbar can be used in a fragment
+//        mapFragment.view?.let {
+//            Snackbar.make(it,"Long Press to create a new marker", Snackbar.LENGTH_INDEFINITE)
+//                .setAction("OK",{})
+//                .setActionTextColor(ContextCompat.getColor(this,android.R.color.white))
+//                .show()
+//        }
+
+
+        // Giving the user instructions on how to create/delete markers
+        mapFragment.view?.let {
+            Snackbar.make(it,"Long Press To create Marker! \nTap on Marker to delete!",Snackbar.LENGTH_INDEFINITE)
+                .setAction("OK",{})
+                .setActionTextColor(ContextCompat.getColor(this,android.R.color.white))
+                .show()
+        }
+
     }
 
     /**
