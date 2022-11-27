@@ -81,7 +81,7 @@ class CreateNewMapActivity : AppCompatActivity(), OnMapReadyCallback {
                 Toast.makeText(this,"No markers selected", Toast.LENGTH_SHORT).show()
                 return true
             }
-            // Create new map
+            // Create new map informtation from marker object
             val places = userMarkers.map { marker -> Place(marker.title,marker.snippet,marker.position.latitude,marker.position.longitude) }
             val userCreatedMap = UserCreatedMap(intent.getStringExtra(EXTRA_MAP_TITLE), places)
             val data = Intent()
