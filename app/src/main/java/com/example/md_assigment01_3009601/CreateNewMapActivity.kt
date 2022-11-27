@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
@@ -60,6 +62,21 @@ class CreateNewMapActivity : AppCompatActivity(), OnMapReadyCallback {
                 .show()
         }
 
+    }
+
+    // Reference new menu file
+    fun onCreateOptionMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.menu_user_created_map,menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        // Ensure item selected is the save item
+        if (item.itemId == R.id.menuSave)  {
+            Log.i(TAG,"click save >>")
+            return true
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     /**
