@@ -1,7 +1,8 @@
 package com.example.md_assigment01_3009601
 
-import android.app.Dialog
+import android.app.Activity
 import android.content.DialogInterface
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -13,13 +14,14 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 
-import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.example.md_assigment01_3009601.databinding.ActivityCreateNewMapBinding
+import com.example.md_assigment01_3009601.models.Place
+import com.example.md_assigment01_3009601.models.UserCreatedMap
 import com.google.android.gms.maps.model.Marker
 import com.google.android.material.snackbar.Snackbar
 
@@ -65,7 +67,7 @@ class CreateNewMapActivity : AppCompatActivity(), OnMapReadyCallback {
     }
 
     // Reference new menu file
-    fun onCreateOptionMenu(menu: Menu): Boolean {
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_user_created_map,menu)
         return super.onCreateOptionsMenu(menu)
     }
@@ -74,6 +76,18 @@ class CreateNewMapActivity : AppCompatActivity(), OnMapReadyCallback {
         // Ensure item selected is the save item
         if (item.itemId == R.id.menuSave)  {
             Log.i(TAG,"click save >>")
+            // Check if user has selected markers
+            if (userMarkers.isEmpty()){
+                Toast.makeText(this,"No markers selected", Toast.LENGTH_SHORT).show()
+                return true
+            }
+            // Create new map
+            val places = userMarkers.map { marker -> Place(marker.title,marker.snippet,marker.position.latitude,marker.position.longitude) }
+            val userCreatedMap = UserCreatedMap(intent.getStringExtra(EXTRA_MAP_TITLE), places)
+            val data = Intent()
+            data.putExtra(EXTRA_USER_MAP,userCreatedMap)
+            setResult(Activity.RESULT_OK,data)
+            finish()
             return true
         }
         return super.onOptionsItemSelected(item)
@@ -108,7 +122,6 @@ class CreateNewMapActivity : AppCompatActivity(), OnMapReadyCallback {
             markerToDelete.remove()
         }
     }
-
 
     private fun showAlertDialog(latLng: LatLng) {
 

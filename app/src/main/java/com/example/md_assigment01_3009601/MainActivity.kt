@@ -69,6 +69,8 @@ class MainActivity : AppCompatActivity() {
         // Check if requestcode and resultcode match
         if (requestCode == REQUEST_CODE && resultCode == Activity.RESULT_OK){
             // return new map data
+            val userCreatedMap = data?.getSerializableExtra(EXTRA_USER_MAP) as UserCreatedMap
+
         }
         super.onActivityResult(requestCode, resultCode, data)
     }

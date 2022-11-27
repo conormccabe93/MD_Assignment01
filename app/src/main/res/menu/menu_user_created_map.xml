@@ -5,6 +5,6 @@
     <item
         android:id="@+id/menuSave"
         android:icon="@android:drawable/ic_menu_save"
-        android:title="Save Map"
+        android:title="@string/save_map"
         app:showAsAction="always" />
 </menu>
