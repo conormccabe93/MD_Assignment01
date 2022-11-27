@@ -68,7 +68,7 @@ class CreateNewMapActivity : AppCompatActivity(), OnMapReadyCallback {
             Log.i(TAG,"click save >>")
             // Check if user has selected markers
             if (userMarkers.isEmpty()){
-                Toast.makeText(this,"No markers selected", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this,"No Markers Selected!", Toast.LENGTH_SHORT).show()
                 return true
             }
             // Create new map information from marker object

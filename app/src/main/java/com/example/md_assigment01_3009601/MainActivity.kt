@@ -26,7 +26,7 @@ private const val REQUEST_CODE = 123
 
 @Suppress("DEPRECATION")
 class MainActivity : AppCompatActivity() {
-    // define recycler view
+
     private lateinit var mapRecyclerView: RecyclerView
     private lateinit var floatingActionButton: FloatingActionButton
     private lateinit var userCreatedMaps: MutableList<UserCreatedMap>
@@ -140,7 +140,7 @@ class MainActivity : AppCompatActivity() {
             // Check if both text blocks have been filled in
             if (newMapName.trim().isEmpty()) {
                 // prompt user to fill in both text blocks
-                Toast.makeText(this, "Fill out New Map Name!", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "Fill Out New Map Name!", Toast.LENGTH_LONG).show()
                 return@setOnClickListener
             }
 
