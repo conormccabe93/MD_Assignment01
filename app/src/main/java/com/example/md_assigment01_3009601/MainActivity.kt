@@ -140,7 +140,7 @@ class MainActivity : AppCompatActivity() {
             // Check if both text blocks have been filled in
             if (newMapName.trim().isEmpty()) {
                 // prompt user to fill in both text blocks
-                Toast.makeText(this, "Fill out Name / Description", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "Fill out New Map Name!", Toast.LENGTH_LONG).show()
                 return@setOnClickListener
             }
 
