@@ -15,9 +15,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.md_assigment01_3009601.models.Place
 import com.example.md_assigment01_3009601.models.UserCreatedMap
-import com.google.android.gms.maps.model.LatLng
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import java.io.File
+import java.io.FileInputStream
+import java.io.FileOutputStream
+import java.io.ObjectInputStream
+import java.io.ObjectOutputStream
 
 // GitHub REPO:  https://github.com/conormccabe93/MD_Assignment01.git
 
@@ -40,8 +43,12 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        // Call deserialize Method to show userCreatedMaps
+        val userCreatedMapsFromFile = deserializeUserCreatedMaps(this)
+
         // Call testData function for test
         userCreatedMaps = testData().toMutableList()
+        userCreatedMaps.addAll(userCreatedMapsFromFile)
 
         // Initialize recyclerview variable
         mapRecyclerView = findViewById(R.id.mapRecyclerView)
@@ -78,8 +85,33 @@ class MainActivity : AppCompatActivity() {
             userCreatedMaps.add(userCreatedMap)
             // notify change in size
             mapAdapter.notifyItemInserted(userCreatedMaps.size - 1)
+
+            serializeUserCreatedMaps(this, userCreatedMaps)
         }
         super.onActivityResult(requestCode, resultCode, data)
+    }
+
+    // Method to write to File
+    private fun serializeUserCreatedMaps(context: Context, userCreatedMaps: List<UserCreatedMap>){
+        // Log stamp
+        Log.i(TAG,"serializedUserCreatedMaps")
+        // write data to file
+        ObjectOutputStream(FileOutputStream(getDataFile(context))).use { it.writeObject(userCreatedMaps) }
+    }
+
+    // Method to read data from File
+    private fun deserializeUserCreatedMaps(context: Context): List<UserCreatedMap> {
+        // Log stamp
+        Log.i(TAG,"deserializedUserCreatedMaps")
+        val dataFile = getDataFile(context)
+        // check for data file first
+        if (!dataFile.exists()){
+            Log.i(TAG,"No data file found")
+            return emptyList()
+        }
+        // read all data from file if found and create new list of maps
+        ObjectInputStream(FileInputStream(dataFile)).use { return it.readObject() as List<UserCreatedMap> }
+
     }
 
     // Returns file that methods read/write to
