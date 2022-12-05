@@ -38,16 +38,12 @@ class MainActivity : AppCompatActivity() {
     private lateinit var userCreatedMaps: MutableList<UserCreatedMap>
     private lateinit var mapAdapter: MapAdapter
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         // Call deserialize Method to show userCreatedMaps
         userCreatedMaps = deserializeUserCreatedMaps(this).toMutableList()
-
-        // Call testData function for test
-        // userCreatedMaps = testData().toMutableList()
 
         // Initialize recyclerview variable
         mapRecyclerView = findViewById(R.id.mapRecyclerView)
