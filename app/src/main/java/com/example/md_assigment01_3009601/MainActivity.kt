@@ -1,6 +1,7 @@
 package com.example.md_assigment01_3009601
 
 import android.app.Activity
+import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -16,12 +17,14 @@ import com.example.md_assigment01_3009601.models.Place
 import com.example.md_assigment01_3009601.models.UserCreatedMap
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import java.io.File
 
 // GitHub REPO:  https://github.com/conormccabe93/MD_Assignment01.git
 
 private const val TAG = "MainActivity"
 const val EXTRA_USER_MAP = "EXTRA_USER_MAP"
 const val EXTRA_MAP_TITLE = "EXTRA_MAP_TITLE"
+private const val FILENAME = "UserCreatedMaps.data"
 private const val REQUEST_CODE = 123
 
 @Suppress("DEPRECATION")
@@ -77,6 +80,12 @@ class MainActivity : AppCompatActivity() {
             mapAdapter.notifyItemInserted(userCreatedMaps.size - 1)
         }
         super.onActivityResult(requestCode, resultCode, data)
+    }
+
+    // Returns file that methods read/write to
+    private fun getDataFile(context: Context): File {
+        Log.i(TAG,"Directory File > ${context.filesDir}")
+        return File(context.filesDir, FILENAME)
     }
 
     // Create Sample data to test display

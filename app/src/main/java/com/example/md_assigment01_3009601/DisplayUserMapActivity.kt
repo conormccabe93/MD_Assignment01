@@ -63,7 +63,7 @@ class DisplayUserMapActivity : AppCompatActivity(), OnMapReadyCallback {
             mMap.addMarker(MarkerOptions().position(latLng).title(place.title).snippet(place.description))
         }
         // Set camera move to centre focus on user locations
-//        mMap.moveCamera(CameraUpdateFactory.newLatLngBounds(boundsBuilder.build(),500,500,0))
+        // mMap.moveCamera(CameraUpdateFactory.newLatLngBounds(boundsBuilder.build(),500,500,0))
 
         // Animation of camera to zoom in on markers
         mMap.animateCamera(CameraUpdateFactory.newLatLngBounds(boundsBuilder.build(),500,500,0))
