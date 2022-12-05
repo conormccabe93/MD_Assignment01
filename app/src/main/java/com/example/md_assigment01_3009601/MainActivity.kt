@@ -44,11 +44,10 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         // Call deserialize Method to show userCreatedMaps
-        val userCreatedMapsFromFile = deserializeUserCreatedMaps(this)
+        userCreatedMaps = deserializeUserCreatedMaps(this).toMutableList()
 
         // Call testData function for test
-        userCreatedMaps = testData().toMutableList()
-        userCreatedMaps.addAll(userCreatedMapsFromFile)
+        // userCreatedMaps = testData().toMutableList()
 
         // Initialize recyclerview variable
         mapRecyclerView = findViewById(R.id.mapRecyclerView)
