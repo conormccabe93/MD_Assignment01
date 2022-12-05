@@ -24,7 +24,7 @@ class MapAdapter(val context: Context, val userCreatedMaps: List<UserCreatedMap>
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         // Create new view using Inflater with a default list
-        val viewpoint = LayoutInflater.from(context).inflate(android.R.layout.simple_list_item_1,parent,false)
+        val viewpoint = LayoutInflater.from(context).inflate(R.layout.item_map,parent,false)
         return ViewHolder(viewpoint)
     }
 
@@ -37,7 +37,7 @@ class MapAdapter(val context: Context, val userCreatedMaps: List<UserCreatedMap>
             Log.i(TAG,"User selected  > $position")
             onClickListener.onItemClick(position)
         }
-        val textViewTitle = holder.itemView.findViewById<TextView>(android.R.id.text1)
+        val textViewTitle = holder.itemView.findViewById<TextView>(R.id.map_View)
         textViewTitle.text = userMap.title
     }
 
